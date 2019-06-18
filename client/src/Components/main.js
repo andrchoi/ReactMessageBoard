@@ -3,8 +3,12 @@ import Topbar from './topbar';
 import Body from './body';
 import About from './about';
 import {connect} from 'react-redux';
+import {addSamples} from '../Actions/index';
 
-class Main extends React.Component {
+class Main extends React.Component {   
+    componentDidMount() {
+        this.props.addSamples();
+    }
     
     render () {
         let result = <Body/>;
@@ -23,8 +27,9 @@ class Main extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-        page: state.page
+        page: state.page,
+        comment: state.comments
   };
 }
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, {addSamples})(Main);

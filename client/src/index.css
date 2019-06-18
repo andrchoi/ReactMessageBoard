@@ -49,6 +49,10 @@ ul {
     margin-right: 20em;
 }
 
+.comments li div:hover {
+    cursor: pointer;
+}
+
 #main {
     margin-top: 4em;
 }

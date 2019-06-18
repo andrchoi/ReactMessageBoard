@@ -1,15 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Comment from './comment';
-import {addSamples} from '../Actions/index';
 
 class Posts extends React.Component {
-    componentDidMount() {
-        if (this.props.comment.length === 0) {
-            this.props.addSamples();
-        }
-    }
-
     render() {
         return (
             <div>
@@ -32,4 +25,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps, {addSamples})(Posts);
+export default connect(mapStateToProps)(Posts);

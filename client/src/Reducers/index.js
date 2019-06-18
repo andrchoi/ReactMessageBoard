@@ -1,10 +1,5 @@
 import { combineReducers } from 'redux';
 
-const samples = [
-    {content: "Hello World"},
-    {content: "Sup"}
-];
-
 const modifyPosts = (posts = [], action) => {
     if (action.content !== ''){
         if (action.type === 'ADD_COMMENT') {
@@ -16,20 +11,10 @@ const modifyPosts = (posts = [], action) => {
             newPosts.splice(posts.length, 0, p);
             return newPosts;
 
-        } else if (action.type === 'ADD_SAMPLES') {
-            let newPosts = posts.slice();
-            samples.forEach(
-                function (m) {
-                    m.date = action.date;
-                    newPosts.splice(newPosts.length, 0, m);
-                }
-            )
-            return newPosts; 
         }
     }
-    if (action.type === 'DELETE_POST') {
-        let newPosts = posts.slice();
-        newPosts.splice(action.payload, 1);
+    if (action.type === 'UPDATE_POSTS') {
+        let newPosts = action.posts;
         return newPosts;
     }
     return posts;
@@ -59,11 +44,21 @@ const makeDetail = (post = {}, action) => {
     return post;
 }
 
+const isLoading = (status = false, action) => {
+    if (action.type === 'LOADING_POSTS') {
+        status = true;
+    } else {
+        status = false;
+    }
+    return status;
+}
+
 export default combineReducers (
     {
         comments: modifyPosts,
         text: formUpdate,
         page: changePage,
-        detail: makeDetail
+        detail: makeDetail,
+        status: isLoading
     }
 );
