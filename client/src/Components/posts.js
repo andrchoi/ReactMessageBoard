@@ -10,7 +10,7 @@ class Posts extends React.Component {
                 <div className="comments">
                     <ul>
                         {this.props.comment.map((c, index) => (
-                            <Comment key={index} index={index} content={c.content} date={c.date}/>
+                            <Comment key={index} index={c._id} pos={index} content={c.content} date={c.date}/>
                         ))}
                     </ul>
                 </div>

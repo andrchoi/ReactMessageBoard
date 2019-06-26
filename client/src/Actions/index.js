@@ -22,40 +22,6 @@ function addPostToServer(date, value) {
     })
 }
 
-export const addSamples = () => {
-    return dispatch => {
-        dispatch({type:'LOADING_POSTS'})
-        getServerResult('http://localhost:4000/posts').then(function (res) {
-            if (res.length === 0) {
-                let time = new Date().toString();
-                let index = time.indexOf(":")+6;
-                let date = time.slice(0,index);
-                getServerResult('http://localhost:4000/posts/samples').then(function (data) {
-                    data.forEach(
-                        function (m) {
-                            addPostToServer(date, m.content).then(function () {
-                                getServerResult('http://localhost:4000/posts').then(function (posts) {
-                                    dispatch({
-                                        type: 'UPDATE_POSTS',
-                                        posts: posts
-                                    })
-                                })
-                            });
-                        }
-                    )
-                })
-            }
-        }).then(function () {
-            getServerResult('http://localhost:4000/posts').then(function (posts) {
-                dispatch({
-                    type: 'UPDATE_POSTS',
-                    posts: posts
-                })
-            })
-        });
-    } 
-}
-
 export const addComment = (value, date) => {
     return dispatch => {
         dispatch({type:'LOADING_POSTS'})

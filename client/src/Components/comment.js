@@ -4,7 +4,7 @@ import {makeDetail, deletePost} from '../Actions/index';
 
 class Comment extends React.Component {
     handleClick = () => {
-        let info = this.props.index
+        let info = this.props.pos
         this.props.makeDetail(info)
     }
 
