@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-import { config } from '../config.js';
+let config = require('../config.js');
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = config().uri;
+const uri = config.uri;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 let posts = [];
