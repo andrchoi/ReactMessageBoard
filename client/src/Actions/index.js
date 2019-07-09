@@ -1,4 +1,5 @@
 const axios = require('axios');
+const port = process.env.PORT || 4000;
 
 export const changePage = (value) => {
     return {
@@ -14,7 +15,7 @@ function getServerResult(url) {
 }
 
 function addPostToServer(date, value) {
-    return axios.post('http://localhost:'+process.env.PORT+'/posts', {
+    return axios.post('http://localhost:'+port+'/posts', {
         date: date,
         content: value
     }).then(response => {
@@ -27,7 +28,7 @@ export const addComment = (value, date) => {
         dispatch({type:'LOADING_POSTS'})
         if (value !== '') {
             addPostToServer(date, value).then(function () {
-                getServerResult('http://localhost:'+process.env.PORT+'/posts').then(function (posts) {
+                getServerResult('http://localhost:'+port+'/posts').then(function (posts) {
                     dispatch({
                         type: 'UPDATE_POSTS',
                         posts: posts
@@ -54,7 +55,7 @@ export const clearForm = () => {
 export const makeDetail = (index) => {
     return dispatch => {
         dispatch({type:'LOADING_POSTS'})
-        getServerResult('http://localhost:'+process.env.PORT+'/posts/'+index).then(function (post) {
+        getServerResult('http://localhost:'+port+'/posts/'+index).then(function (post) {
             dispatch({
                 type:'MAKE_DETAIL',
                 payload: post
@@ -64,7 +65,7 @@ export const makeDetail = (index) => {
 }
 
 function serverDelete(id) {
-    return axios.delete('http://localhost:'+process.env.PORT+'/posts/'+id).then(response => {
+    return axios.delete('http://localhost:'+port+'/posts/'+id).then(response => {
         return response.data;
     })
 }
@@ -73,7 +74,7 @@ export const deletePost = (index) => {
     return dispatch => {
         dispatch({type:'LOADING_POSTS'})
         serverDelete(index).then(function () {
-            getServerResult('http://localhost:'+process.env.PORT+'/posts').then(function (posts) {
+            getServerResult('http://localhost:'+port+'/posts').then(function (posts) {
                 dispatch({
                     type: 'UPDATE_POSTS',
                     posts: posts
@@ -86,7 +87,7 @@ export const deletePost = (index) => {
 export const updatePost = () => {
     return dispatch => {
         dispatch({type:'LOADING_POSTS'});
-        getServerResult('http://localhost:'+process.env.PORT+'/posts').then(posts => {
+        getServerResult('http://localhost:'+port+'/posts').then(posts => {
             dispatch({
                 type: 'UPDATE_POSTS',
                 posts: posts
