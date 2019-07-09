@@ -3,7 +3,7 @@ var router = express.Router();
 // let config = require('../config.js');
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = URI //config.uri;
+const uri = process.env.URI; //config.uri;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 let posts = [];
