@@ -1,5 +1,6 @@
 const axios = require('axios');
 const port = process.env.PORT || 'http://localhost:4000';
+console.log(process.env.PORT)
 
 export const changePage = (value) => {
     return {
